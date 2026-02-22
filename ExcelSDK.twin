@@ -59,6 +59,7 @@ Public Enum XloperTypes
     xltypeMulti = &H0040
     xltypeMissing = &H0080
     xltypeNil = &H0100
+    xltypeBlank = &H0200 'undocumented for empty cells in a multi-array
     xltypeSRef = &H0400
     xltypeInt = &H0800
     xlbitXLFree = &H1000
@@ -1661,6 +1662,7 @@ End Function
     ' return(mdRet);
 
 ' }
+'NOTE: Excel12v's first argument (xlfn) can also take an ExcelCallbackFunctionNumbers enum value such as xlSheetNm
 Public Function Excel12v(ByVal xlfn As ExcelCommandNumbers, operRes As XLOPER12, ByVal count As Long, opers() As XLOPER12) As Excel4ReturnCodes
     Dim mdRet As Excel4ReturnCodes
     FetchExcel12EntryPt()
@@ -1779,7 +1781,7 @@ End Function
 Public Function GetXLBool12(b As Boolean) As XLOPER12
     GetXLBool12.xltype = xltypeBool
     Dim bl As Long = If(b, 1&, 0&)
-    CopyMemory ByVal VarPtr(GetXLBool12.val(0)), b, 4
+    CopyMemory ByVal VarPtr(GetXLBool12.val(0)), bl, 4
 End Function
 Public Function GetXLErr12(ByVal errnum As Long) As XLOPER12
     GetXLErr12.xltype = xltypeErr
@@ -1886,7 +1888,7 @@ Class cMemPool
     End Sub
  
     Public Function Alloc(cb As LongPtr) As LongPtr
-        Alloc = hMem + cb
+        Alloc = hMem + lOffset
         lOffset += cb
     End Function
 End Class

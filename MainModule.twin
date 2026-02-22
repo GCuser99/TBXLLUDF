@@ -175,27 +175,6 @@ Module MainModule
     End Function
 
     [DllExport]
-    Public Function xlAutoClose() As Long
-        Dim operFunc1(0) As XLOPER12
-        operFunc1(0) = GetXLString12(FuncName1)
-        Excel12v(xlfSetName, ByVal vbNullPtr, 1, operFunc1)
-    
-        Dim operFunc2(0) As XLOPER12
-        operFunc2(0) = GetXLString12(FuncName2)
-        Excel12v(xlfSetName, ByVal vbNullPtr, 1, operFunc2)
-    
-        Dim operFunc3(0) As XLOPER12
-        operFunc3(0) = GetXLString12(FuncName3)
-        Excel12v(xlfSetName, ByVal vbNullPtr, 1, operFunc3)
-    
-        Dim operFunc4(0) As XLOPER12
-        operFunc4(0) = GetXLString12(FuncName4)
-        Excel12v(xlfSetName, ByVal vbNullPtr, 1, operFunc4)
-    
-        Return 1
-    End Function
-    
-    [DllExport]
     Public Function xlAutoRemove() As Long
         'Notes:
         'See https://learn.microsoft.com/en-us/office/client-developer/excel/known-issues-in-excel-xll-development#unregistering-xll-commands-and-functions
@@ -513,7 +492,7 @@ Module MainModule
         Return VarPtr(xResult)
     End Function
 
-    'this one simply takes a string as input and tries to output to sheet - does not work yet.
+    'this one simply takes a string as input and tries to output to sheet
     [DllExport]
     Public Function TBXLLUDFString(pIn As XLOPER12) As LongPtr 'LPXLOPER12
         Dim num As String
