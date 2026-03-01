@@ -98,7 +98,7 @@ Module MainModule
 
         ' Get XLL name
         Dim xDLL(0) As XLOPER12
-        Excel12v(xlGetName, xDLL(0), 0)
+        Excel12v(xlGetName, xDLL(0))
 
         Dim i As Long
 
@@ -201,7 +201,7 @@ Module MainModule
         '--------------------------------------------------------------------------
         ' Step 1: First unregister the UDFs
         '--------------------------------------------------------------------------
-        Excel12v(xlGetName, xOpers(0), 0)
+        Excel12v(xlGetName, xOpers(0))
 
         xOpers(1) = GetXLString12(FuncName0)
         Excel12v(xlfRegisterId, xRegId(0), 2, xOpers)
@@ -234,7 +234,7 @@ Module MainModule
         ' Step 2: Re-register UDFs as hidden (macro_type=2)
         '--------------------------------------------------------------------------
         Dim xDLL(0) As XLOPER12
-        Excel12v(xlGetName, xDLL(0), 0)
+        Excel12v(xlGetName, xDLL(0))
 
         Dim func1def(11) As XLOPER12
         func1def(0) = xDLL(0)
@@ -308,7 +308,7 @@ Module MainModule
         '--------------------------------------------------------------------------
         ' Step 3: Unregister the hidden functions
         '--------------------------------------------------------------------------
-        Excel12v(xlGetName, xOpers(0), 0)
+        Excel12v(xlGetName, xOpers(0))
 
         xOpers(1) = GetXLString12(FuncName0)
         Excel12v(xlfRegisterId, xRegId(0), 2, xOpers)

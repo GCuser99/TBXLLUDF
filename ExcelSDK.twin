@@ -1682,15 +1682,13 @@ Public Function Excel12v(ByVal xlfn As ExcelCommandNumbers, operRes As XLOPER12,
     End If
     Return mdRet
 End Function
-Public Function Excel12v(ByVal xlfn As ExcelCommandNumbers, operRes As XLOPER12, ByVal count As Long) As Excel4ReturnCodes
+Public Function Excel12v(ByVal xlfn As ExcelCommandNumbers, operRes As XLOPER12) As Excel4ReturnCodes
     Dim mdRet As Excel4ReturnCodes
     FetchExcel12EntryPt()
     If (pexcel12 = 0) Then
         mdRet = xlretFailed
-    ElseIf count = 0 Then
-        mdRet = pexcel12(xlfn, count, ByVal 0, operRes)
     Else
-        mdRet = xlretFailed
+        mdRet = pexcel12(xlfn, 0, ByVal 0, operRes)
     End If
     Return mdRet
 End Function
@@ -1794,8 +1792,7 @@ End Function
 Public Function GetXLActiveRef12(ByVal rwFirst As Long, ByVal rwLast As Long, ByVal colFirst As Long, ByVal colLast As Long) As XLOPER12
     Dim lpmref As LongPtr = cMemPool.Alloc(LenB(Of XLMREF12))
     Dim wRet As Long
-    Dim dummy(0) As XLOPER12
-    wRet = Excel12v(xlSheetId, GetXLActiveRef12, 0, dummy)
+    wRet = Excel12v(xlSheetId, GetXLActiveRef12)
     If wRet <> xlretSuccess Then
         Exit Function 'We can't return or check for null pointer, so the caller will have to check xlType <> 0
     Else
